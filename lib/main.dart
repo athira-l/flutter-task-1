@@ -11,7 +11,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(initialRoute: '/data', getPages: Routes.routes);
+    return GetMaterialApp(
+        theme: ThemeData.light(),
+        debugShowCheckedModeBanner: false,
+        initialRoute: '/data', getPages: Routes.routes);
   }
 }
 

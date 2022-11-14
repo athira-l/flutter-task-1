@@ -10,5 +10,4 @@ class Provider extends GetConnect{
       return response.body['data'];
     }
   }
-
 }
