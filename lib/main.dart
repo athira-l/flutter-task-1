@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:training_1/controller/datacontroller.dart';
+import 'package:training_1/data.dart';
 import 'package:training_1/routes/route.dart';
 
 void main() {
@@ -14,49 +16,24 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
         theme: ThemeData.light(),
         debugShowCheckedModeBanner: false,
-        initialRoute: '/data', getPages: Routes.routes);
+        initialRoute: '/data',
+        getPages: Routes.routes);
   }
 }
 
 class DetailScreen extends StatelessWidget {
-  const DetailScreen(
-      {super.key,
-      required this.name,
-      required this.email,
-      required this.avatar});
+  const DetailScreen({super.key, required this.id});
 
-  final String name, email, avatar;
+  final int id;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Details'),
-        backgroundColor: Colors.green,
-      ),
-      body: Center(
-        child: Card(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                margin: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
-                child: Image.network(avatar, width: 150.0, height: 150.0),
-              ),
-              Container(
-                margin: const EdgeInsets.all(5.0),
-                child: Text(name, style: const TextStyle(fontSize: 20)),
-              ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(20.0, 5.0, 20.0, 15.0),
-                child: Text('Email : $email',
-                    style: const TextStyle(fontSize: 14)),
-              ),
-            ],
-          ),
-        ),
-      ),
+    Get.put(id);
+    Get.lazyPut(() => DataController1(id: id));
+
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Data1(),
     );
   }
 }
