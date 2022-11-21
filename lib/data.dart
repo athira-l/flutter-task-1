@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:training_1/controller/datacontroller.dart';
 import 'package:training_1/main.dart';
 
-class Data extends GetView<DataController> {
+class Data extends GetView<UserListController> {
   const Data({super.key});
 
   @override
@@ -35,7 +35,7 @@ class Data extends GetView<DataController> {
                                 controller.state![index]["avatar"]),
                           ),
                           onTap: () {
-                            Get.to(DetailScreen(
+                            Get.to(UserDetailsScreen(
                                 id: controller.state![index]['id']));
                             /*  Navigator.push(
                               context,
@@ -65,7 +65,7 @@ class Data extends GetView<DataController> {
   }
 }
 
-class Data1 extends GetView<DataController1> {
+class Data1 extends GetView<UserDetailsController> {
   const Data1({super.key});
 
   @override

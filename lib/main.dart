@@ -164,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ]),
                   TextButton(
                     style: TextButton.styleFrom(
-                      padding: const EdgeInsets.fromLTRB(0, 13, 0, 0),
+                      padding: const EdgeInsets.fromLTRB(0, 7, 0, 0),
                     ),
                     child: const Text(
                       'Forgot Password?',
@@ -199,7 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       backgroundColor:
                           MaterialStateProperty.all(const Color(0xcc54a484))),
                   onPressed: () {
-                    if (_nameController.text.compareTo("admin") == 0 &&
+                      if (_nameController.text.compareTo("admin") == 0 &&
                         _passwordController.text.compareTo("password") == 0) {
                       Get.to(const UserListScreen());
                     } else {
@@ -208,7 +208,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         "Invalid username/password",
                         snackPosition: SnackPosition.BOTTOM,
                         backgroundColor: const Color(0x00ffffff),
-                        colorText: Colors.white,
+                        colorText: Colors.red,
                       );
                       /*ScaffoldMessenger.of(context)
                               .showSnackBar(const SnackBar(
@@ -236,7 +236,7 @@ class UserListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => DataController());
+    Get.lazyPut(() => UserListController());
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Data(),
@@ -244,15 +244,15 @@ class UserListScreen extends StatelessWidget {
   }
 }
 
-class DetailScreen extends StatelessWidget {
-  const DetailScreen({super.key, required this.id});
+class UserDetailsScreen extends StatelessWidget {
+  const UserDetailsScreen({super.key, required this.id});
 
   final int id;
 
   @override
   Widget build(BuildContext context) {
     Get.put(id);
-    Get.lazyPut(() => DataController1(id: id));
+    Get.lazyPut(() => UserDetailsController(id: id));
 
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
