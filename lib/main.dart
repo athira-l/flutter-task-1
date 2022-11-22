@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:training_1/controller/datacontroller.dart';
 import 'package:training_1/data.dart';
+import 'package:training_1/provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -134,7 +135,9 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
                     Transform.scale(
                       scale: 0.8,
                       child: Checkbox(
@@ -164,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ]),
                   TextButton(
                     style: TextButton.styleFrom(
-                      padding: const EdgeInsets.fromLTRB(0, 7, 0, 0),
+                      padding: const EdgeInsets.fromLTRB(0, 13, 0, 0),
                     ),
                     child: const Text(
                       'Forgot Password?',
@@ -199,7 +202,22 @@ class _LoginScreenState extends State<LoginScreen> {
                       backgroundColor:
                           MaterialStateProperty.all(const Color(0xcc54a484))),
                   onPressed: () {
-                      if (_nameController.text.compareTo("admin") == 0 &&
+                    if (_nameController.text.isEmpty ||
+                        _passwordController.text.isEmpty) {
+                      Get.snackbar(
+                        "",
+                        "Invalid username/password",
+                        snackPosition: SnackPosition.BOTTOM,
+                        backgroundColor: const Color(0x00ffffff),
+                        colorText: Colors.red,
+                      );
+                    } else {
+                      Provider().login({
+                        'email': _nameController.text.toString(),
+                        'password': _passwordController.text.toString()
+                      });
+                    }
+                    /*if (_nameController.text.compareTo("admin") == 0 &&
                         _passwordController.text.compareTo("password") == 0) {
                       Get.to(const UserListScreen());
                     } else {
@@ -210,11 +228,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         backgroundColor: const Color(0x00ffffff),
                         colorText: Colors.red,
                       );
-                      /*ScaffoldMessenger.of(context)
+                      */ /*ScaffoldMessenger.of(context)
                               .showSnackBar(const SnackBar(
                             content: Text("Invalid username/password"),
-                          ));*/
-                    }
+                          ));*/ /*
+                    }*/
                   },
                   child: const Text(
                     'Login',
